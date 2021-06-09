@@ -230,6 +230,22 @@ vector<vector<int>> chapter_one_rotate_matrix(vector<vector<int>> m) {
   return m;
 }
 
+vector<vector<int>> chapter_one_zero_matrix(vector<vector<int>> m) {
+  // Zero Matrix: Write an algorithm such that if an element in an MxN matrix is
+  // 0, its entire row and column are set to 0.
+
+  return {{}};
+}
+
+bool chapter_one_string_rotation(string s1, string s2) {
+  // String Rotation: Assume you have a method `isSubstring` which checks if one
+  // word is a substring of another. Given two strings, s1 and s2, write code to
+  // check if s2 is a rotation of s1 using ony one call to `isSubstring` (e.g.,
+  // "waterbottle" is a rotation of "erbottlewat").
+
+  return false;
+}
+
 int main() {
   assert(chapter_one_is_unique("abxktyolwqd"));
   assert(chapter_one_check_permutation("abadada", "abadada"));
@@ -237,12 +253,17 @@ int main() {
   assert(chapter_one_palindrome_permutation("tactcoaoa"));
   assert(chapter_one_one_away("abadada", "abadaxa"));
   assert(chapter_one_string_compression("aabcccccaaa") == "a2b1c5a3");
-
   vector<vector<int>> rotated = {
       {13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3}, {16, 12, 8, 4}};
   assert(chapter_one_rotate_matrix(
              {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}) ==
          rotated);
+  vector<vector<int>> zeroed = {
+      {0, 0, 0, 0}, {1, 2, 0, 4}, {6, 1, 0, 8}, {9, 2, 0, 1}};
+  assert(chapter_one_zero_matrix(
+             {{1, 2, 0, 4}, {1, 2, 3, 4}, {6, 1, 6, 8}, {9, 2, 1, 1}}) ==
+         zeroed);
+  assert(chapter_one_string_rotation("waterbottle", "erbottlewat"));
 
   return 0;
 }
