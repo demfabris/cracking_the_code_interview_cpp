@@ -153,7 +153,84 @@ bool chapter_one_one_away(string s1, string s2) {
   // pale,  bale  ->  true
   // pale,  bake  ->  false
 
+  sort(s1.begin(), s1.end());
+  sort(s2.begin(), s2.end());
+
+  int ld = abs(int(s1.length() - s2.length()));
+  int mm = 0;
+  int bigger = s1.length() > s2.length() ? s1.length() : s2.length();
+
+  if (ld > 1) {
+    return false;
+  }
+
+  for (int i = 0; i < bigger; i++) {
+    // this is a crime, i know
+    if (s1[i] != s2[i]) {
+      mm++;
+    }
+  }
+
+  if (ld == 1) {
+    return mm == 1;
+  } else if (ld == 0) {
+    return mm <= 1;
+  }
+
   return false;
+}
+
+string chapter_one_string_compression(string s1) {
+  // String compression: Implement a method to perform basic string compression
+  // using the counts of repeated characters. For example, the string
+  // aabcccccaaa would become a2b1c5a3. If the `compressed` string would not
+  // become smaller than the original string, your method should return the
+  // original string. you can assume the string has only uppercase and lowercase
+  // letters (a-z).
+
+  char last = s1[0];
+  int occur = 1;
+  string result;
+
+  for (int i = 1; i < s1.length(); i++) {
+    if (s1[i] == last) {
+      occur++;
+      if (i == s1.length() - 1) {
+        result += last + to_string(occur);
+        break;
+      }
+    } else {
+      result += last + to_string(occur);
+      last = s1[i];
+      occur = 1;
+    }
+  }
+
+  return result;
+}
+
+vector<vector<int>> chapter_one_rotate_matrix(vector<vector<int>> m) {
+  // Rotate Matrix: Given an image represented by an NxN matrix, where each
+  // pixel in the image is 4 bytes, write a method to rotate the image by 90
+  // degrees. Can you do this in place?
+
+  int len = m.size();
+
+  for (int i = 0; i < len / 2; i++) {
+    for (int j = i; j < len - i - 1; j++) {
+      int aux = m[i][j];
+
+      m[i][j] = m[len - j - 1][i]; // bottom left -> up
+
+      m[len - j - 1][i] = m[len - i - 1][len - j - 1]; // bottom right -> left
+
+      m[len - i - 1][len - j - 1] = m[j][len - i - 1]; // top right -> bottom
+
+      m[j][len - i - 1] = aux;
+    }
+  }
+
+  return m;
 }
 
 int main() {
@@ -161,6 +238,14 @@ int main() {
   assert(chapter_one_check_permutation("abadada", "abadada"));
   assert(chapter_one_urlify("Mr John Smith     ", 13) == "Mr%20John%20Smith");
   assert(chapter_one_palindrome_permutation("tactcoaoa"));
+  assert(chapter_one_one_away("abadada", "abadaxa"));
+  assert(chapter_one_string_compression("aabcccccaaa") == "a2b1c5a3");
+
+  vector<vector<int>> rotated = {
+      {13, 9, 5, 1}, {14, 10, 6, 2}, {15, 11, 7, 3}, {16, 12, 8, 4}};
+  assert(chapter_one_rotate_matrix(
+             {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}) ==
+         rotated);
 
   return 0;
 }
