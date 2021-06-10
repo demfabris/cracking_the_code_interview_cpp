@@ -12,8 +12,8 @@
 // Here you'll find all solutions for Cracking the Code Interview.
 // These are MY solutions, definelly NOT the best out there.
 //
-#include "chapter_one.h"
-#include "chapter_two.h"
+#include "lib/chapter_one.h"
+#include "lib/chapter_two.h"
 #include <bits/stdc++.h>
 
 using namespace std;
