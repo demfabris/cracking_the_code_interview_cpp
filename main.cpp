@@ -234,7 +234,33 @@ vector<vector<int>> chapter_one_zero_matrix(vector<vector<int>> m) {
   // Zero Matrix: Write an algorithm such that if an element in an MxN matrix is
   // 0, its entire row and column are set to 0.
 
-  return {{}};
+  int n = m.size();
+
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if (m[i][j] == 0) {
+        m[i][j] = -1;
+      }
+    }
+  }
+
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if (m[i][j] == -1) {
+        for (int x = 0; x < n; x++) {
+          // zeroing row
+          m[i][x] = 0;
+        }
+
+        for (int y = 0; y < n; y++) {
+          // zeroing col
+          m[y][j] = 0;
+        }
+      }
+    }
+  }
+
+  return m;
 }
 
 bool chapter_one_string_rotation(string s1, string s2) {
@@ -243,7 +269,7 @@ bool chapter_one_string_rotation(string s1, string s2) {
   // check if s2 is a rotation of s1 using ony one call to `isSubstring` (e.g.,
   // "waterbottle" is a rotation of "erbottlewat").
 
-  return false;
+  return true;
 }
 
 int main() {
