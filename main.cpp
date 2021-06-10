@@ -18,9 +18,42 @@
 
 using namespace std;
 
-int main() {
-  chapter_one();
-  chapter_two();
+int main(int argc, char **argv) {
+  bool chap_one = false;
+  bool chap_two = false;
+  bool all = true;
+
+  for (int i = 0; i < argc; i++) {
+    if (argv[i] == string("--chapter-one") || argv[i] == string("-c1")) {
+      cout << "Running chapter one solutions";
+
+      chap_one = true;
+      all = false;
+      continue;
+    }
+
+    if (argv[i] == string("--chapter-two") || argv[i] == string("-c2")) {
+      cout << "Running chapter two solutions";
+
+      chap_two = true;
+      all = false;
+      continue;
+    }
+  }
+
+  if (all) {
+    cout << "Running all solutions";
+
+    chapter_one();
+    chapter_two();
+
+    return 0;
+  }
+
+  if (chap_one)
+    chapter_one();
+  if (chap_two)
+    chapter_two();
 
   return 0;
 }
