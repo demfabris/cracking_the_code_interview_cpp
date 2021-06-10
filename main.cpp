@@ -266,10 +266,25 @@ vector<vector<int>> chapter_one_zero_matrix(vector<vector<int>> m) {
 bool chapter_one_string_rotation(string s1, string s2) {
   // String Rotation: Assume you have a method `isSubstring` which checks if one
   // word is a substring of another. Given two strings, s1 and s2, write code to
-  // check if s2 is a rotation of s1 using ony one call to `isSubstring` (e.g.,
+  // check if s2 is a rotation of s1 using only one call to `isSubstring` (e.g.,
   // "waterbottle" is a rotation of "erbottlewat").
 
-  return true;
+  int index = 0;
+  int len = s1.length();
+
+  while (index < len) {
+    char aux = s2[len - 1];
+    s2.pop_back();
+    s2 = aux + s2;
+
+    if (s1 == s2) {
+      return true;
+    }
+
+    index++;
+  }
+
+  return false;
 }
 
 int main() {
