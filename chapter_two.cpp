@@ -9,4 +9,5 @@ using namespace std;
 //                |_|
 //
 //
-void chapter_two() { cout << "hello world"; }
+
+void chapter_two() {}
