@@ -35,16 +35,34 @@ LinkedList chapter_two_remove_dups(LinkedList list) {
   return list;
 }
 
-LinkedList chapter_two_return_kth_to_last(LinkedList list) {
+int chapter_two_return_kth_to_last(LinkedList list, int kth) {
   // Return Kth to Last: Implement an algorithm to find the kth to last element
   // of a singly linked list.
 
-  LinkedList result = LinkedList({});
-  return result;
+  Node *curr = list.head;
+  Node *curr_ahead = list.head;
+
+  for (int i = 0; i < kth - 1; i++) {
+    // Setting curr_ahead to k elements ahead
+    if (curr_ahead->next != NULL) {
+      curr_ahead = curr_ahead->next;
+    } else {
+      // Not enough list elements to find kth
+    }
+  }
+
+  while (curr_ahead->next != NULL) {
+    curr_ahead = curr_ahead->next;
+    curr = curr->next;
+  }
+
+  return curr->data;
 }
 
 void chapter_two() {
-  LinkedList q1 = LinkedList({1, 2, 3, 1, 4, 5, 6, 1, 1, 5, 6, 9});
+  LinkedList list = LinkedList({1, 2, 3, 1, 4, 5, 6, 1, 1, 5, 6, 9});
   LinkedList q1_expected = LinkedList({1, 2, 3, 4, 5, 6, 9});
-  assert(chapter_two_remove_dups(q1) == q1_expected);
+  assert(chapter_two_remove_dups(list) == q1_expected);
+
+  assert(chapter_two_return_kth_to_last(list, 3) == 5);
 }
