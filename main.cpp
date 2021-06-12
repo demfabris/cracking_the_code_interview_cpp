@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
 
   for (int i = 0; i < argc; i++) {
     if (argv[i] == string("--chapter-one") || argv[i] == string("-c1")) {
-      cout << "Running chapter one solutions";
+      cout << "Running chapter one solutions" << endl;
 
       chap_one = true;
       all = false;
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
     }
 
     if (argv[i] == string("--chapter-two") || argv[i] == string("-c2")) {
-      cout << "Running chapter two solutions";
+      cout << "Running chapter two solutions" << endl;
 
       chap_two = true;
       all = false;
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
   }
 
   if (all) {
-    cout << "Running all solutions";
+    cout << "Running all solutions" << endl;
 
     chapter_one();
     chapter_two();

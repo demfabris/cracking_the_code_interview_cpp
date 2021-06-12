@@ -1,3 +1,5 @@
+#include "lib/chapter_two.h"
+#include "lib/data_structures.h"
 #include <bits/stdc++.h>
 using namespace std;
 //
@@ -9,5 +11,16 @@ using namespace std;
 //                |_|
 //
 //
+LinkedList chapter_two_remove_dups(LinkedList list) {
+  // Remove Dups: Write code to remove duplicates from an unsorted linked list.
+  // FOLLOW UP
+  // How would you solve this problem if a temporary buffer is not allowed?
 
-void chapter_two() {}
+  LinkedList result = LinkedList({});
+  return result;
+}
+
+void chapter_two() {
+  LinkedList q1 = LinkedList({});
+  q1.transverse();
+}
