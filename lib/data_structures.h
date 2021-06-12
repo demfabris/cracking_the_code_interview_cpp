@@ -19,6 +19,8 @@ public:
 
   LinkedList(std::vector<int> vec);
 
+  bool operator==(LinkedList const other);
+
   void transverse();
 
   void push(int value);

@@ -5,6 +5,27 @@ using namespace std;
 
 Node::Node(int value) { data = value; }
 
+bool LinkedList::operator==(LinkedList other) {
+  Node *curr1 = head;
+  Node *curr2 = other.head;
+
+  while (curr1->next != NULL && curr2->next != NULL) {
+    if (curr1->data == curr2->data) {
+      curr1 = curr1->next;
+      curr2 = curr2->next;
+    } else {
+      return false;
+    }
+  }
+
+  if ((curr1->next == NULL && curr2->next != NULL) ||
+      curr1->next != NULL && curr2->next == NULL) {
+    return false;
+  }
+
+  return true;
+}
+
 LinkedList::LinkedList(vector<int> vec) {
   if (vec.size() == 0) {
     head = NULL;
