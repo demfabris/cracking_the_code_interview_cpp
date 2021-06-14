@@ -18,10 +18,10 @@ LinkedList chapter_two_remove_dups(LinkedList list) {
 
   Node *node = list.head;
 
-  while (node != NULL) {
+  while (node != nullptr) {
     Node *curr = node;
 
-    while (curr->next != NULL) {
+    while (curr->next != nullptr) {
       if (curr->next->data == node->data) {
         curr->next = curr->next->next;
       } else {
@@ -44,14 +44,14 @@ int chapter_two_return_kth_to_last(LinkedList list, int kth) {
 
   for (int i = 0; i < kth - 1; i++) {
     // Setting curr_ahead to k elements ahead
-    if (curr_ahead->next != NULL) {
+    if (curr_ahead->next != nullptr) {
       curr_ahead = curr_ahead->next;
     } else {
       // Not enough list elements to find kth
     }
   }
 
-  while (curr_ahead->next != NULL) {
+  while (curr_ahead->next != nullptr) {
     curr_ahead = curr_ahead->next;
     curr = curr->next;
   }
@@ -70,13 +70,13 @@ LinkedList chapter_two_delete_middle_node(Node *middle) {
 
   Node *curr = middle;
 
-  while (curr->next->next != NULL) {
+  while (curr->next->next != nullptr) {
     curr->data = curr->next->data;
     curr = curr->next;
   }
 
   curr->data = curr->next->data;
-  curr->next = NULL;
+  curr->next = nullptr;
 
   LinkedList list = LinkedList({});
   list.head = middle;
@@ -84,7 +84,7 @@ LinkedList chapter_two_delete_middle_node(Node *middle) {
   return list;
 }
 
-LinkedList chapter_two_partition(LinkedList list) {
+LinkedList chapter_two_partition(LinkedList list, int part) {
   // Partition: Write code to partition a liked list around a value x, such that
   // all nodes less than x come before all nodes greater than or equal to x. If
   // x is contained within the list, the values of x only need to be after the
@@ -95,6 +95,32 @@ LinkedList chapter_two_partition(LinkedList list) {
   // EXAMPLE
   // Input: 3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1 [partition=5]
   // Output: 3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
+
+  Node *curr = list.head; // 3
+  Node *outer = list.head;
+
+  while (curr != nullptr) {
+    Node *inner = curr; // 5
+
+    if (inner->data >= part) {
+      while (inner->next != nullptr) {
+        int aux = inner->data; // 5
+        inner->data = inner->next->data;
+        inner->next->data = aux;
+        inner = inner->next;
+      }
+
+      if (outer->next != nullptr) {
+        // outer counter to prevent infinite switching
+        outer = outer->next;
+      } else {
+        break;
+      }
+
+    } else {
+      curr = curr->next;
+    }
+  }
 
   return list;
 }
@@ -109,4 +135,8 @@ void chapter_two() {
   LinkedList list2 = LinkedList({1, 2, 3, 4, 5, 6});
   LinkedList q2_expected = LinkedList({4, 5, 6});
   assert(chapter_two_delete_middle_node(list2.head->next->next) == q2_expected);
+
+  LinkedList list3 = LinkedList({3, 5, 8, 5, 10, 2, 1});
+  LinkedList q3_expected = LinkedList({3, 2, 1, 10, 5, 8, 5});
+  assert(chapter_two_partition(list3, 5) == q3_expected);
 }
