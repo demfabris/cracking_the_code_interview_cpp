@@ -125,6 +125,69 @@ LinkedList chapter_two_partition(LinkedList list, int part) {
   return list;
 }
 
+LinkedList chapter_two_sum_lists(LinkedList l1, LinkedList l2) {
+  // Sum Lists: you have two numbers represented by a linked list, where each
+  // node contains a single digit. The digits are stored in reverse order, such
+  // that the 1's digit is at the head of the list. Write a function that adds
+  // the two numbers and returns the sum as a linked list.
+  //
+  // EXAMPLE
+  // Input: ( 7 -> 1 -> 6 ) + ( 5 -> 9 -> 2 ) = 617 + 295
+  // Output: 2 -> 1 -> 9 = 912
+  //
+  // FOLLOW UP
+  // Suppose the digits are stored in forward order. Repeat the above problem.
+  //
+  // EXAMPLE
+  // Input: ( 6 -> 1 -> 7 ) + ( 2 -> 9 -> 5 ) = 617 + 295
+  // Output: 9 -> 1 -> 2 = 912
+
+  Node *n1 = l1.head;
+  Node *n2 = l2.head;
+  int dec = 1;
+  int sum = 0;
+
+  while (true) {
+    sum += (n1->data + n2->data) * dec;
+    dec *= 10;
+
+    if (n1->next == nullptr && n2->next == nullptr) {
+      break;
+    }
+
+    if (n1->next != nullptr) {
+      n1 = n1->next;
+    } else {
+      n1->data = 0;
+    }
+
+    if (n2->next != nullptr) {
+      n2 = n2->next;
+    } else {
+      n2->data = 0;
+    }
+  }
+
+  LinkedList list = LinkedList({});
+  list.head = new Node(sum % 10);
+  sum /= 10;
+  Node *curr = list.head;
+
+  while (sum > 0) {
+    curr->next = new Node(sum % 10);
+    sum /= 10;
+    curr = curr->next;
+  }
+
+  return list;
+}
+
+bool chapter_two_palindrome(LinkedList list) {
+  // Palindrome: Implement a function to check if a linked list is a palindrome.
+
+  return true;
+}
+
 void chapter_two() {
   LinkedList list = LinkedList({1, 2, 3, 1, 4, 5, 6, 1, 1, 5, 6, 9});
   LinkedList q1_expected = LinkedList({1, 2, 3, 4, 5, 6, 9});
@@ -139,4 +202,9 @@ void chapter_two() {
   LinkedList list3 = LinkedList({3, 5, 8, 5, 10, 2, 1});
   LinkedList q3_expected = LinkedList({3, 2, 1, 10, 5, 8, 5});
   assert(chapter_two_partition(list3, 5) == q3_expected);
+
+  LinkedList list4_1 = LinkedList({7, 1, 6});
+  LinkedList list4_2 = LinkedList({5, 9, 2});
+  LinkedList q4_expected = LinkedList({2, 1, 9});
+  assert(chapter_two_sum_lists(list4_1, list4_2) == q4_expected);
 }
