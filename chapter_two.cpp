@@ -185,6 +185,23 @@ LinkedList chapter_two_sum_lists(LinkedList l1, LinkedList l2) {
 bool chapter_two_palindrome(LinkedList list) {
   // Palindrome: Implement a function to check if a linked list is a palindrome.
 
+  Node *curr = list.head;
+  Node *prev = nullptr;
+  Node *head = nullptr;
+
+  while (curr != nullptr) {
+    head = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = head;
+  }
+
+  LinkedList reversed = LinkedList({});
+  reversed.head = prev;
+
+  reversed.transverse();
+  list.transverse();
+
   return true;
 }
 
@@ -207,4 +224,7 @@ void chapter_two() {
   LinkedList list4_2 = LinkedList({5, 9, 2});
   LinkedList q4_expected = LinkedList({2, 1, 9});
   assert(chapter_two_sum_lists(list4_1, list4_2) == q4_expected);
+
+  LinkedList list5 = LinkedList({1, 2, 2, 3, 3, 5, 3, 3, 2, 2, 1});
+  chapter_two_palindrome(list5);
 }
