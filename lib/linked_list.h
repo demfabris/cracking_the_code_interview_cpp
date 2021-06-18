@@ -1,7 +1,5 @@
+#pragma once
 #include <bits/stdc++.h>
-
-#ifndef DATA_STRUCTURES_H
-#define DATA_STRUCTURES_H
 
 class Node {
 
@@ -27,5 +25,3 @@ public:
 
   int length();
 };
-
-#endif

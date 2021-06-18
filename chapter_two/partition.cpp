@@ -1,4 +1,4 @@
-#include "../lib/data_structures.h"
+#include "../lib/linked_list.h"
 #include <bits/stdc++.h>
 using namespace std;
 //
