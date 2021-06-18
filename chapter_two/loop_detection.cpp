@@ -30,39 +30,33 @@ Node *loop_detection(LinkedList list) {
 
     if (curr == faster) {
       // found the loop, now search for the beginning
+      Node *head = list.head;
+      while (head->next != curr->next) {
+        head = head->next;
+        curr = curr->next;
+      }
+
+      return curr; // this is the corrupted node
     }
   }
 
   return new Node(-1);
 }
 
-// 1 -> 2 -> 3 -> 4 -> 1 -> 2 -> 3 -> 4 -> 1 -> 2 -> 3 -> 4
-// 1 -> 2 -> 3 -> 4 -> 2 -> 3 -> 4 -> 2 -> 3 -> 4 -> 2 -> 3
-// 1 -> 2 -> 3 -> 4 -> 3 -> 4 -> 3 -> 4 -> 3 -> 4 -> 3 -> 4
-//
-// 1 -> 2 -> 3 -> 4 -> 5 -> 1 -> 2 -> 3 -> 4 -> 5 -> 1 -> 2 -> 3 -> 4 -> 5
-// 1 -> 2 -> 3 -> 4 -> 5 -> 2 -> 3 -> 4 -> 5 -> 2 -> 3 -> 4 -> 5 -> 2 -> 3
-// 1 -> 2 -> 3 -> 4 -> 5 -> 3 -> 4 -> 5 -> 3 -> 4 -> 5 -> 3 -> 4 -> 5 -> 3
-//
-
 int main() {
   LinkedList input = LinkedList({1, 2, 3});
   Node *corrupted_node = input.head->next->next;
   corrupted_node->next = input.head->next; // input now: 1 -> 2 -> 3 -> 2...
 
-  LinkedList input2 = LinkedList({1, 2, 3, 4});
-  Node *corrupted_node2 = input2.head->next->next->next;
-  corrupted_node2->next = input2.head; // input now: 1 -> 2 -> 3 -> 4 -> 1...
+  LinkedList input2 = LinkedList({1, 2, 3, 4, 5});
+  Node *corrupted_node2 = input2.head->next->next->next->next;
+  corrupted_node2->next = input2.head->next->next;
 
-  LinkedList input3 = LinkedList({1, 2, 3, 4, 5});
-  Node *corrupted_node3 = input3.head->next->next->next->next;
-  corrupted_node3->next = input3.head->next->next;
+  LinkedList input3 = LinkedList({1, 2, 3, 4, 5, 6});
+  Node *corrupted_node3 = input3.head->next->next->next->next->next;
+  corrupted_node3->next = input3.head->next;
 
-  LinkedList input4 = LinkedList({1, 2, 3, 4, 5, 6});
-  Node *corrupted_node4 = input4.head->next->next->next->next->next;
-  corrupted_node4->next = input4.head->next;
-
-  loop_detection(input4);
-  /* assert(loop_detection(input) == corrupted_node); */
-  /* assert(loop_detection(input2) == corrupted_node2); */
+  assert(loop_detection(input) == corrupted_node);
+  assert(loop_detection(input2) == corrupted_node2);
+  assert(loop_detection(input3) == corrupted_node3);
 }
