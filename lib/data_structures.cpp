@@ -9,7 +9,7 @@ bool LinkedList::operator==(LinkedList other) {
   Node *curr1 = head;
   Node *curr2 = other.head;
 
-  while (curr1->next != NULL && curr2->next != NULL) {
+  while (curr1->next != nullptr && curr2->next != nullptr) {
     if (curr1->data == curr2->data) {
       curr1 = curr1->next;
       curr2 = curr2->next;
@@ -18,8 +18,8 @@ bool LinkedList::operator==(LinkedList other) {
     }
   }
 
-  if ((curr1->next == NULL && curr2->next != NULL) ||
-      curr1->next != NULL && curr2->next == NULL) {
+  if ((curr1->next == nullptr && curr2->next != nullptr) ||
+      curr1->next != nullptr && curr2->next == nullptr) {
     return false;
   }
 
@@ -28,7 +28,7 @@ bool LinkedList::operator==(LinkedList other) {
 
 LinkedList::LinkedList(vector<int> vec) {
   if (vec.size() == 0) {
-    head = NULL;
+    head = nullptr;
   } else {
     int i = 0;
     head = new Node(vec[i++]);
@@ -45,12 +45,12 @@ LinkedList::LinkedList(vector<int> vec) {
 void LinkedList::transverse() {
   Node *curr = head;
 
-  if (curr == NULL) {
+  if (curr == nullptr) {
     cout << "EMPTY" << endl;
     return;
   }
 
-  while (curr != NULL) {
+  while (curr != nullptr) {
     cout << curr->data << ' ';
     curr = curr->next;
   }
@@ -62,15 +62,27 @@ void LinkedList::push(int value) {
   Node *curr = head;
   Node *n = new Node(value);
 
-  if (curr == NULL) {
+  if (curr == nullptr) {
     curr = n;
     head = curr;
     return;
   }
 
-  while (curr->next != NULL) {
+  while (curr->next != nullptr) {
     curr = curr->next;
   }
 
   curr->next = n;
+}
+
+int LinkedList::length() {
+  Node *curr = head;
+  int count = 0;
+
+  while (curr->next != nullptr) {
+    count++;
+    curr = curr->next;
+  }
+
+  return count;
 }

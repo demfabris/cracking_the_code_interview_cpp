@@ -24,6 +24,8 @@ public:
   void transverse();
 
   void push(int value);
+
+  int length();
 };
 
 #endif

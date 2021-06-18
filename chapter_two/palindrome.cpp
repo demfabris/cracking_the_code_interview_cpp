@@ -10,8 +10,8 @@ using namespace std;
 //                |_|
 //
 // Palindrome: Implement a function to check if a linked list is a palindrome.
-bool palindrome(LinkedList list) {
-
+LinkedList palindrome_1(LinkedList list) {
+  // Reverse the list and compare input == output
   Node *curr = list.head;
   Node *prev = nullptr;
   Node *head = nullptr;
@@ -26,14 +26,18 @@ bool palindrome(LinkedList list) {
   LinkedList reversed = LinkedList({});
   reversed.head = prev;
 
-  reversed.transverse();
-  list.transverse();
+  return reversed;
+}
+
+bool palindrome_2(LinkedList list) {
+  // TODO: Recursive method.
 
   return true;
 }
 
 int main() {
   LinkedList input = LinkedList({1, 2, 2, 3, 3, 5, 3, 3, 2, 2, 1});
-
-  palindrome(input);
+  LinkedList expected = LinkedList({1, 2, 2, 3, 3, 5, 3, 3, 2, 2, 1});
+  assert(palindrome_1(input) == expected);
+  palindrome_2(input);
 }
