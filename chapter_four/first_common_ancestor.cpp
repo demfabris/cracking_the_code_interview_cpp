@@ -41,15 +41,29 @@ public:
   BTNode(int value) { data = value; };
 };
 
+BTNode *recurse(BTNode *n1, BTNode *n2, BTNode *root) {
+  if (root == n1 || root == n2 || root == nullptr) {
+    return root;
+  }
+
+  BTNode *left = recurse(n1, n2, root->left);
+  BTNode *right = recurse(n1, n2, root->right);
+
+  if (left and right) {
+    return root;
+  } else {
+    return left ? left : right;
+  }
+}
+
 BTNode *first_common_ancestor(BTNode *n1, BTNode *n2, BTNode *root) {
-  // 1. do BFS to find either n1 or n2 in left and right subtree.
+  // 1. do DFS to find either n1 or n2 in left and right subtree.
   // 2. if both n1 and n2 are in some subtree. then there's a new first common
   // ancestor.
   // 3. if only one of them are in the subtree. the current root is the first
   // common ancestor.
   // 4. if none of them are in the subtree, panic.
-
-  return root;
+  return recurse(n1, n2, root);
 }
 
 int main() {
@@ -62,6 +76,6 @@ int main() {
   node->left->right = new BTNode(2);
   node->left->left = new BTNode(0);
 
-  // Passing root, node(2) and node(6)
-  first_common_ancestor(node, node->left->right, node->right->right);
+  // Passing node(2), node(6) and root
+  first_common_ancestor(node->left->right, node->right->right, node);
 }
